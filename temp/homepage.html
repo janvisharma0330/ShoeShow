@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ShoeKart</title>
+    <link rel = "icon" href = 
+"https://www.linkpicture.com/q/ShoeKartLogo-removebg-preview.png" 
+        type = "image/x-icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="utf-8">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+VlvoGtGtMS04U+25z5nRv4JGz5lX6bpeb+a5S3n6I5D" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/static/loginInAssests/loginCss.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+VlvoGtGtMS04U+25z5nRv4JGz5lX6bpeb+a5S3n6I5D" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/loginInAssests/loginCss.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    
+    <style>
+        .navbar-container {
+            /* display: flex;
+            justify-content: center; */
+            width: 500px; /* Set the desired width */
+            margin: 0 auto; /* Center horizontally */
+        }
+        .text-white{
+            color:black
+        }
+        .user-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            float: right;
+        }
+    
+        .cart-user-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content:right; 
+            align-items: center;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+    
+        .user-icon:hover {
+            background-color: rgb(165, 138, 42);
+        }
+    
+        .overlay {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+    }
+    
+    /* Style for the dialog box */
+    .dialog-box {
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        position: relative;
+    }
+    
+    
+    /* Style for the red cross */
+    .close-icon {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 20px;
+        color: brown;
+        cursor: pointer;
+    }
+    
+    /* Style for the title */
+    .dialog-box h2 {
+        font-size: 26px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    /* Style for the form */
+    .dialog-box form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Style for labels */
+    .dialog-box label {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #555;
+    }
+    
+    /* Style for input fields */
+    .dialog-box input[type="text"],
+    .dialog-box input[type="password"] {
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+    
+    /* Style for password toggle */
+    .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 25px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #aaa;
+    }
+    
+    /* Style for login button */
+    .login-button {
+        background-color: #6348d6;;
+        color: #fff;
+        border: none;
+        padding: 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: 600;
+    }
+    
+    .login-button:hover {
+        background-color: #4c32b0;
+    }
+    
+    /* Style for bottom links */
+    .bottom-links {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #666;
+    }
+    
+    .bottom-links a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    
+    .bottom-links a:hover {
+        color: #0056b3;
+    }
+    
+    /* Style for close button */
+    .close-button {
+        background-color: transparent;
+        border: none;
+        color: #777;
+        font-size: 14px;
+        cursor: pointer;
+        transition: color 0.3s;
+        margin-top: 25px;
+    }
+    
+    .close-button:hover {
+        color: #333;
+    }
+        
+        .topnav a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+    
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: black;
+            color: black;
+        }
+    
+        /* Style the search box inside the navigation bar */
+        .topnav input[type=text] {
+            float: left;
+            padding: 6px;
+            border: none;
+            margin-top: 8px;
+            /* margin-right: px; */
+            margin-left: 25px;
+            font-size: 17px;
+            width: 500px;
+        }
+    
+        /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+        @media screen and (max-width: 600px) {
+            .topnav a, .topnav input[type=text] {
+                    float: none;
+                    display: block;
+                    text-align: left;
+                    width: 100%;
+                    margin: 0;
+                    padding: 14px;
+            }
+            .topnav input[type=text] {
+                border: 1px solid #ccc;
+            }
+        }
+        .card {
+            /* Add shadows to create the "card" effect */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+    
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 15px 15px 23px 15px rgba(0,0,0,0.2);
+        }
+    
+        .container {
+            padding: 2px 16px;
+            justify-content: center;
+        }
+        
+        #wishlistButton {
+            cursor: pointer;
+            width: 100px;
+            height: 45px; 
+            font-size: 35px;
+            position: absolute;
+            top: 15px;
+            right: 0;
+        }
+    
+        .shoeBrand {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+        .shoeBrand:hover{
+            overflow: visible; 
+            white-space: normal;
+            height:auto;  /* just added this line */
+        }
+    
+        .shoeColor {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+        .logo-image{
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-top: -6px;
+        }
+    
+        .shoeColor:hover{
+            overflow: visible; 
+            white-space: normal;
+            height:auto;  /* just added this line */
+        }
+    
+        .active {
+            background-color: black; /* Change this to the desired background color */
+            padding: 10px;
+            border-radius: 5px;
+        }
+    
+        .recommendations-header {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    
+        .recommendations-header h1 {
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: brown;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .heart-symbol {
+            color: red;
+        }
+    
+        #logOutButton {
+            float: right;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            margin-top: -40px;
+            margin-right: 20px;
+        }
+    
+        #logOutButton span {
+            font-weight: bold;
+            font-size: 20px; /* Increase the font size */
+            margin-right: 10px;
+            color: white;
+        }
+    
+        #logOutButton a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            border: 2px solid brown;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+    
+        #logOutButton a:hover {
+            background-color: black;
+            color: white;
+        }
+    
+        .dropdown {
+            position: relative;
+            margin: 10px;
+        }
+
+        .dropbtn {
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+
+            color: brown;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+
+        }
+        .dropbtn:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            min-width: 160px;
+            border-radius: 5px;
+            padding: 8px 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            
+            color: brown;
+            padding: 8px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .nav2 {
+            border: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .arrow-down {
+            margin-left: 3px;
+            font-size: 12px;
+            vertical-align: middle; /* Adjust vertical alignment */
+            transform: translateY(-2px); 
+        }
+
+        .navbarContent {
+            display: flex;
+            align-items: center;
+
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: brown;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+.card{
+    height: 298px;
+    width: 180px;
+    margin: 18px;
+   }
+.cardbrands{
+    height: 150px;
+    width: 180px;
+    margin: 18px;
+}
+   .cardDiv>div{
+       height: 400px;
+       background-repeat:no-repeat;
+   }
+   
+   .mainflex{
+       display: flex;
+       flex-flow: row wrap;
+       justify-content: center;
+   }
+   .flexbox{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+   }
+   .flexbox2{
+       display: flex;
+       flex-flow: row wrap;
+      }
+   
+   .posterDiv{
+   width: 15%;
+   }
+   .poster{
+       height: 350px;
+       width: 100%;
+   }
+   .dropbtn {
+     padding: 16px;
+     font-size: 16px;
+     border: none;
+   }
+   
+
+        .recommendations-header {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .recommendations-header h1 {
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: brown;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            /* Add shadows to create the "card" effect */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+    
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 15px 15px 23px 15px rgba(0,0,0,0.2);
+        }
+    
+        .container {
+            padding: 2px 16px;
+            justify-content: center;
+        }
+        
+        #wishlistButton {
+            cursor: pointer;
+            width: 100px;
+            height: 45px; 
+            font-size: 35px;
+            position: absolute;
+            top: 15px;
+            right: 0;
+        }
+    
+        .shoeBrand {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+        .shoeBrand:hover{
+            overflow: visible; 
+            white-space: normal;
+            height:auto;  /* just added this line */
+        }
+    
+        .shoeColor {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+        .logo-image{
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-top: -6px;
+        }
+    
+        .shoeColor:hover{
+            overflow: visible; 
+            white-space: normal;
+            height:auto;  /* just added this line */
+        }
+    
+        .active {
+            background-color: black; /* Change this to the desired background color */
+            padding: 10px;
+            border-radius: 5px;
+        }
+    
+        .recommendations-header {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    
+        .recommendations-header h1 {
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: brown;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .heart-symbol {
+            color: red;
+        }
+    
+        #logOutButton {
+            float: right;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            margin-top: -40px;
+            margin-right: 20px;
+        }
+    
+        #logOutButton span {
+            font-weight: bold;
+            font-size: 20px; /* Increase the font size */
+            margin-right: 10px;
+            color: white;
+        }
+    
+        #logOutButton a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            border: 2px solid brown;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+    
+        #logOutButton a:hover {
+            background-color: black;
+            color: white;
+        }
+
+        
+    </style>
+</head>
+
+<body style="background-image: url(https://i.pinimg.com/originals/4c/52/97/4c5297b1a347d051533c39e3f630a274.jpg);height: 100%;">
+    <nav class="navbar navbar-default" style="background-color: brown;height: 56.6px; margin-bottom: 0px;">
+        <div class = "topnav">
+            <div class="navbar-header" style="margin-top: -10px;">
+                <a class="navbar-brand" href="/">
+                    <img src="https://www.linkpicture.com/q/ShoeKartLogo-removebg-preview.png" alt="Logo" width="80" height="45">
+                </a>
+            </div>
+            <a href="/bestSellers" style="color: white;">Best Sellers</a>
+            <a href="/recommend" style="color: white;">Recommend</a>
+            <a href="/allProducts" style="color: white;">Our Products</a>
+            <a href="/contactUs" style="color: white;">About us</a>
+            <input type="text" placeholder="Search for products, brand and more">
+        </div>  
+        
+        
+        {% if user %}
+            <div class = "cart-user-icon" onclick="openCart()" style="padding-left: 80px; padding-top: 10px;">
+                <span class="bi bi-cart-fill" style="color: white;"> </span> 
+            </div>
+
+            <p id="logOutButton">
+                <span>Welcome, {{ user }}!</span>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </p>
+        {% else %}
+            {% if invalid %}
+                <script>alert("Invalid Login")</script>
+            {% endif %}
+
+            <div class="user-icon" id="userIcon" onclick="sessionCheck()">
+                <span style="font-size: xx-large; margin-top: 10px;" class="bi bi-person-fill"></span>
+            </div>
+
+            <div class="overlay" id="overlay">
+                <div class="panel-lite" style="width: 340px; height: 490px;">
+                <div class="close-icon" id="closeButton" onclick="closeDialog()">&#10006;</div>
+
+                    <div class="icon-container">
+                        <img class="icon-lock" src="/static/images/ShoeKartLogoCircle.jpg" alt="">
+                    </div>
+                    <div class="loginContainer">
+                        <h4> <strong>Login</strong></h4>
+                        <form method="POST" action="{{ url_for('login') }}">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="username" required>
+                                <label class="form-label">Username</label>
+                              </div>
+                              
+                              <div class="form-group">
+                                <input class="form-control" type="password" name="password" required>
+                                <label class="form-label">Password</label>
+                              </div>
+                              <a href="#">Forgot Password ?</a>
+                            <button type="submit" class="floating-btn">
+                                <i onclick="" class="icon-arrow"></i>
+                            </button>
+                        </form>
+                    </div> 
+                </div>
+            </div>
+        {% endif %}
+    </nav>
+
+    <div class="navbar-container">
+        <nav class="nav2 navbar navbar-expand-lg navbar-light border m-0 p-0">
+            <div class="navbarContent container-fluid  text-dark justify-content-center m-0 p-0">
+                <div class="dropdown"><button id="Electronic" class="btn  dropbtn dropdown-toggle font-weight-bold m-1"
+                        type="button" data-toggle="dropdown" style="font-size : 20px;padding: 8px; ">MEN <span class="arrow-down">&#9660;</span> </button>
+                        <div class="dropdown-content">
+                            <a href="#">Loafers</a>
+                            <a href="#">Derby Shoes</a>
+                            <a href="#">Chelsea-Style Boots</a>
+                            <a href="#">Casual Slip-On Shoes</a>
+                            <a href="#">Active Sneakers</a>
+                            <a href="#">Walking Shoes</a>
+                            <a href="#">At-Home Shoes</a>
+                            <a href="#">Slides</a>
+                            <a href="#">Active Sandals</a>
+                        </div>
+                </div>
+                <div class="dropdown"><button id="Tv" class="btn dropbtn dropdown-toggle font-weight-bold m-1" type="button"
+                        data-toggle="dropdown" style="font-size : 20px; padding: 8px;">WOMEN  <span class="arrow-down">&#9660;</span> </button>
+                    <div class="dropdown-content">
+                        <a href="#">Boots</a>
+                        <a href="#">Canvas shoes</a>
+                        <a href="#">Cowboy boots</a>
+                        <a href="#">Crocs™ shoes</a>
+                        <a href="#">Espadrille</a>
+                        <a href="#">Flats</a>
+                        <a href="#">Gladiator footwear</a>
+                        <a href="#">Hiking shoes/boots</a>
+                    </div>
+                </div>
+                <div class="dropdown"><button id="Men" class="btn dropbtn dropdown-toggle font-weight-bold m-1"
+                        type="button" data-toggle="dropdown" style="font-size : 20px; padding: 8px;">KIDS  <span class="arrow-down">&#9660;</span>  </button>
+                    <div class="dropdown-content">
+                        <a href="#">Pre-Walking Shoe</a>
+                        <a href="#">Toddler Shoe</a>
+                        <a href="#">School Shoes</a>
+                        <a href="#">Athletic Shoes</a>
+                        <a href="#">Slip On Shoe</a>
+                        <a href="#">High Tops</a>
+                        <a href="#">Sport Shoe</a>
+                    </div>
+                </div>
+            
+                <div class="dropdown"><button id="Baby" class="btn dropbtn dropdown-toggle font-weight-bold m-1"
+                        type="button" data-toggle="dropdown" style="font-size : 20px; padding: 8px;">SALE  <span class="arrow-down">&#9660;</span>  </button>
+                    <div class="dropdown-content">
+                        <a href="#">Skechers</a>
+                        <a href="#">Reebok</a>
+                        <a href="#">Caparros</a>
+                        <a href="#">Vince Camuto</a>
+                        <a href="#">JBU by Jambu</a>
+                        <a href="#">Lee Cooper</a>
+                        <a href="#">Ellen Tracy</a>
+                        <a href="#">Born</a>
+                        <a href="#">Dr. Weil</a>
+                        <a href="#">G by Guess</a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+
+    
+    <style>
+        .carousel-inner .item img {
+            width: 100%;
+            height: 300px; /* You can adjust the height as needed */
+            object-fit: cover;
+        }
+        
+        .carousel-fade .carousel-inner .item {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-fade .carousel-inner .active {
+            opacity: 1;
+        }
+
+        .carousel-fade .carousel-inner .active.left,
+        .carousel-fade .carousel-inner .active.right {
+            left: 0;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .carousel-fade .carousel-inner .next.left,
+        .carousel-fade .carousel-inner .prev.right {
+            left: 0;
+            opacity: 1;
+            z-index: 2;
+        }
+        /* Custom CSS for controls */
+        .carousel-control {
+            opacity: 0.7;
+            transition: opacity 0.5s;
+        }
+
+        .carousel-control:hover {
+            opacity: 1;
+        }
+        .carousel-inner .item {
+            transition: transform 0.3s ease-in-out;
+            transform: translate3d(0, 0, 0);
+        }
+    </style>
+    </style>
+        <div class="container">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="/static/images/carousel1.jpg" alt="Image 1">
+                    </div>
+
+                    <div class="item">
+                        <img src="/static/images/carousel4.jpg" alt="Image 2">
+                    </div>
+
+                    <div class="item">
+                        <img src="/static/images/carousel3.jpg" alt="Image 3">
+                    </div>
+
+                    <div class="item">
+                        <img src="/static/images/carousel2.jpg" alt="Image 4">
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <div class="recommendations-header">
+        <h1 style="margin-top: 50px; margin-bottom: 0px;">Here are some of our Top Rated Products  </h1>
+    </div>
+        <div class="container">
+            <div class="row">
+                {% for i in range(8) %}
+                    <div class="col-md-3" style="margin-top:50px">
+                        <div class="card">
+                            <div class="card-body" style="width: 260px; height: 300px; background-color: white;">
+                                    <img class="card-img-top" style="text-align: center; border: 5px white; border-radius: 5px; margin-top: 30px;" width="140" height="150" src="{{ shoeImage[i] }}">
+                                    <div class = "container" style="width: 228px;">
+                                        <p class="shoeBrand" style="color: grey;"><b>{{ shoeBrand[i] }}</b></p>
+                                        <h5 class="shoeColor" style="height: 15px;">{{ shoeColor[i] }}</h5>
+                                        <h5 style="font-size: larger;">₹{{ shoePrice[i] }}</h5>
+                                        <div class = "container" id="wishlistButton" onclick="addToCart(this)" data-value="{{ i + 1 }}" clicked=false style="left: 130px;">
+                                            &#10084;
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    <style>
+        /* Add your custom styles here */
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .advertisement-container {
+            padding: 30px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 20px auto;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .advertisement-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .advertisement-col {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+        }
+        .advertisement-col img {
+            width: 500px;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #fff;
+            margin: auto; /* Center smaller images */
+        }
+
+        .advertisement-col img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #fff;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="mx-4 border">
+            <div style="margin-top: 50px;" class="row advertisement-row">
+                <div style="width: 520px;height: 320px;" class="col-sm-12 col-lg-4 advertisement-col">
+                    <img style="width: 520px;height: 320px;" src="/static/images/advertisement1.jpg" alt="Advertisement 1">
+                </div>
+                <div style="width: 520px;height: 320px;" class="col-sm-12 col-lg-4 advertisement-col">
+                    <img style="width: 520px;height: 320px;" src="/static/images/advertisement2.jpg" alt="Advertisement 2">
+                </div>
+                <div style="width: 520px;height: 320px;" class="col-sm-12 col-lg-4 advertisement-col">
+                    <img style="width: 520px;height: 320px;" src="/static/images/advertisement3.jpg" alt="Advertisement 3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    
+    <style>
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .recommendations-header {
+            text-align: center;
+            margin-top: 50px;
+        }
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .recommendations-header {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .flexbox2 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .cardbrands {
+            flex: 0 0 calc(20% - 20px);
+            margin: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            width: 150px; /* Fixed width */
+            height: 150px; /* Fixed height */
+            overflow: hidden; /* Hide overflow to prevent distortion */
+        }
+        .cardbrands img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Maintain aspect ratio and cover the container */
+        }
+
+        .recommendations-header {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    
+        .recommendations-header h1 {
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: brown;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    
+        <div class="container-fluid">
+            <div class="mx-4 border">
+                <div class="recommendations-header">
+                    <h1>Our Top Brands</h1>
+                </div>
+                <div class="flexbox2">
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/style&co_logo.jpg" class="card-img-top" alt="Style &amp; Co.">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/caparros_logo.jpg" class="card-img-top" alt="Caparros">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/vince_camuto_logo.jpg" class="card-img-top" alt="Vince Camuto">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/ellen_tracy_logo.jpg" class="card-img-top" alt="Ellen Tracy">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/born_logo.jpg" class="card-img-top" alt="Born">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/alfani_logo.jpg" class="card-img-top" alt="Alfani">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/Kate_Spade_logo.jpg" class="card-img-top" alt="Kate Spade">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/guess_logo.jpg" class="card-img-top" alt="Guess">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/karen_scott_logo.jpg" class="card-img-top" alt="Karen Scott">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function sessionCheck() {
+                const userIcon = document.getElementById("userIcon");
+                const overlay = document.getElementById("overlay");
+                const closeButton = document.getElementById("closeButton");
+        
+                userIcon.addEventListener("click", function() {
+                    overlay.style.display = "flex";
+                });
+        
+                closeButton.addEventListener("click", function() {
+                    overlay.style.display = "none";
+                });
+            }
+        
+            function addToCart(button) {
+                if (user == 'None'){
+                    alert("Please Log-In First");
+                    return;
+                }
+                var shoeId = button.getAttribute("data-value");
+                if (!button.clicked){
+                    fetch(`/addToCart/${shoeId}`) 
+                    alert("Added To Cart!");
+                    button.style.color = "red";
+                    button.clicked = true;
+                }
+                else{
+                    fetch(`/removeFromCart/${shoeId}`)
+                    alert("Removed From Cart!");
+                    button.style.color = "black";
+                    button.clicked = false;
+                }
+            };
+        
+            var user = "{{ user }}";
+            var a = "{{ userCart }}";
+            currCart = new Set();
+        
+            async function fetchData(user) {
+                try {
+                    const response = await fetch(`/getCartValues/${user}`);
+                    const data = await response.json();
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        currCart.add(li.textContent);
+                    });
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
+        
+            function openCart(){
+                window.location.href = "/openCart";
+            }
+        
+            async function makeChangesAccordingToCart() {
+                await fetchData(user); // Fetch cart values and populate currCart
+                // console.log(currCart, user);
+                document.querySelectorAll('[id=wishlistButton]').forEach(element => {
+                    var shoeId = element.getAttribute("data-value");
+                    if (currCart.has(shoeId)) {
+                        element.style.color = "red";
+                        element.clicked = true;
+                    } else {
+                        element.style.color = "black";
+                        element.clicked = false;
+                    }
+                });
+            }
+            makeChangesAccordingToCart();
+        
+        </script>
+</body>
+</html>
